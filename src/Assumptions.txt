@@ -1,0 +1,11 @@
+Assumptions:
+
+- Task manager forms part of a bigger application
+	- Should be build as a microservice application
+- Endpoints should be authorized (low priority for now)
+- Users which will require access
+	- Admin
+	- Manager
+	- Member
+- Member can have multiple tasks
+- Tasks will move from different status during process. eg. from in progress to completed
