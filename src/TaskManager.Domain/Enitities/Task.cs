@@ -11,7 +11,7 @@ namespace TaskManager.Domain.Enitities
         public DateTime? StartTime { get; set; }
         public DateTime? EndDate { get; set; }
         public TaskStatus_Enum Status { get; set; }
-        public long MemberId { get; set; }
+        public long? MemberId { get; set; }
 
         public Member Member { get; set; }
     }

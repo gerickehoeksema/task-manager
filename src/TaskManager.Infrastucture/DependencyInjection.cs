@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -6,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using TaskManager.Application.Interfaces;
 using TaskManager.Infrastucture.Configuration;
+using TaskManager.Infrastucture.Identity;
 using TaskManager.Infrastucture.Persistance;
 using TaskManager.Infrastucture.Services;
 
@@ -19,6 +21,9 @@ namespace TaskManager.Infrastucture
                     options.UseInMemoryDatabase(databaseName: "TaskManager"));
 
             services.AddTransient(provider => (IApplicationDbContext)provider.GetService<ApplicationDbContext>());
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
 
             var jwtConfig = new JwtConfiguration();
             configuration.Bind("Jwt", jwtConfig);

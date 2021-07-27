@@ -8,9 +8,6 @@ namespace TaskManager.Infrastucture.Persistance.Configurations
     {
         public override void ConfigureEntity(EntityTypeBuilder<Member> builder)
         {
-            builder.Property(p => p.Name).IsRequired();
-            builder.Property(p => p.Surname).IsRequired();
-
             builder
                 .HasMany(p => p.Tasks)
                 .WithOne(p => p.Member);

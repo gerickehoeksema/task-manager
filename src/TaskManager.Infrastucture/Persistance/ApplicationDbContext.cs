@@ -8,6 +8,7 @@ using TaskManager.Application.Interfaces;
 using TaskManager.Domain.Common;
 using TaskManager.Domain.Enitities;
 using TaskManager.Infrastucture.Identity;
+using TaskManager.Infrastucture.Persistance.Configurations;
 
 namespace TaskManager.Infrastucture.Persistance
 {
@@ -46,7 +47,13 @@ namespace TaskManager.Infrastucture.Persistance
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            base.OnModelCreating(builder);
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            //builder
+            //    .ApplyConfiguration(new MemberConfiguration())
+            //    .ApplyConfiguration(new TaskConfiguration())
+            //    .ApplyConfiguration(new ApplicationRoleConfiguration())
+            //    .ApplyConfiguration(new ApplicationUserConfiguration());
         }
     }
 }
