@@ -143,9 +143,38 @@ namespace TaskManager.API.Controllers
         }
 
         /// <summary>
+        /// Update a new task
+        /// </summary>
+        [HttpPut("assign/{taskId}/{memberId}",Order = 5)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Assign(long taskId, long memberId)
+        {
+            try
+            {
+                var result = await Mediator
+                    .Send(new AssignTaskCommand
+                    {
+                        TaskId = taskId,
+                        MemberId = memberId
+                    })
+                    .ConfigureAwait(false);
+
+                return result ? NoContent() : BadRequest("Unable to assign task");
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        /// <summary>
         /// Delete a new task
         /// </summary>
-        [HttpDelete("{id}",Order = 5)]
+        [HttpDelete("{id}",Order = 6)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
