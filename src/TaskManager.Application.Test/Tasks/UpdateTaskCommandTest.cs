@@ -1,52 +1,35 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
-using TaskManager.Application.Tasks.Query;
+using TaskManager.Application.Tasks.Command;
 using TaskManager.Domain.Enums;
 
 namespace TaskManager.Application.Test.Tasks
 {
-    public class QueryTaskTest : QueryTestBase
+    public class UpdateTaskCommandTest : CommandTestBase
     {
         [Test]
-        public async Task Should_Handle_GetTask()
+        public async Task Should_Handle_UpdateTask()
         {
             // Arrange
             await SeedAsync().ConfigureAwait(false);
-            var query = new GetTaskQuery { TaskId = 1 };
+            var command = new UpdateTaskCommand { 
+                TaskId = 2,
+                Title = "Just a new description",
+                Status = TaskStatus_Enum.InProgress,
+                StartTime = DateTime.Now
+            };
 
             // Act
-            var handler = new GetTaskQuery.GetTaskQueryHandler(Context, Mapper);
-            var result = await handler.Handle(query, CancellationToken.None).ConfigureAwait(false);
+            var handler = new UpdateTaskCommand.UpdateTaskCommandHandler(Context);
+            var result = await handler.Handle(command, CancellationToken.None).ConfigureAwait(false);
 
             // Assert
-            result.Should().NotBeNull();
+            result.Should().BeTrue();
         }
 
-        [Test]
-        public async Task Should_Handle_GetTaskList()
-        {
-            // Arrange
-            await SeedAsync().ConfigureAwait(false);
-            var query = new GetTaskListQuery();
-
-            // Act
-            var handler = new GetTaskListQuery.GetTaskListQueryHandler(Context, Mapper);
-            var result = await handler.Handle(query, CancellationToken.None).ConfigureAwait(false);
-
-            // Assert
-            result.Should().NotBeNull();
-            result.Should().HaveCount(5);
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            Dispose();
-        }
-
-        // TODO: Refactor to a shared class
         internal async Task SeedAsync()
         {
             await Context.Tasks

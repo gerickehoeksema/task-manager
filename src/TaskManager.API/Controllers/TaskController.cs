@@ -83,7 +83,8 @@ namespace TaskManager.API.Controllers
         /// Create a new task
         /// </summary>
         [HttpPost(Order = 3)]
-        [ProducesResponseType(StatusCodes.Status202Accepted)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Post([FromBody] TaskDTO task)
@@ -98,7 +99,69 @@ namespace TaskManager.API.Controllers
                     })
                     .ConfigureAwait(false);
 
-                return result ? Accepted(task) : BadRequest("Unable to create task");
+                return result ? StatusCode(StatusCodes.Status201Created) : BadRequest("Unable to create task");
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Update a new task
+        /// </summary>
+        [HttpPut(Order = 4)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Put([FromBody] TaskDTO task)
+        {
+            try
+            {
+                var result = await Mediator
+                    .Send(new UpdateTaskCommand
+                    {
+                        TaskId = task.Id,
+                        Title = task.Title,
+                        Description = task.Description,
+                        Status = task.Status,
+                        StartTime = task.StartTime,
+                        EndDate = task.EndDate,
+                        AssignedTo = task.AssignedTo
+                    })
+                    .ConfigureAwait(false);
+
+                return result ? Ok(task) : BadRequest("Unable to update task");
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Delete a new task
+        /// </summary>
+        [HttpDelete("{id}",Order = 5)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Delete(long id)
+        {
+            try
+            {
+                var result = await Mediator
+                    .Send(new DeleteTaskCommand
+                    {
+                        TaskId = id
+                    })
+                    .ConfigureAwait(false);
+
+                return result ? NoContent() : BadRequest("Unable to update task");
             }
             catch (Exception ex)
             {

@@ -7,6 +7,9 @@ using TaskManager.Application.Interfaces;
 
 namespace TaskManager.Application.Tasks.Query
 {
+    /// <summary>
+    /// Get a <see cref="Task"/>
+    /// </summary>
     public class GetTaskQuery : IRequest<TaskDTO>
     {
         public long TaskId { get; set; }

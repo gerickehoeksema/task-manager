@@ -31,7 +31,8 @@ namespace TaskManager.Application.Tasks.Command
                     {
                         Title = request.Title,
                         Description = request.Description,
-                        Status = request.Status
+                        Status = request.Status,
+                        IsActive = true
                     }, cancellationToken)
                     .ConfigureAwait(false);
 

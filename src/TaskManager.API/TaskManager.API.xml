@@ -32,5 +32,20 @@
             Get a task
             </summary>
         </member>
+        <member name="M:TaskManager.API.Controllers.TaskController.Post(TaskManager.Application.Tasks.Query.TaskDTO)">
+            <summary>
+            Create a new task
+            </summary>
+        </member>
+        <member name="M:TaskManager.API.Controllers.TaskController.Put(TaskManager.Application.Tasks.Query.TaskDTO)">
+            <summary>
+            Update a new task
+            </summary>
+        </member>
+        <member name="M:TaskManager.API.Controllers.TaskController.Delete(System.Int64)">
+            <summary>
+            Delete a new task
+            </summary>
+        </member>
     </members>
 </doc>
