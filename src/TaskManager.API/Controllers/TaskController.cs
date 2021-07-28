@@ -129,7 +129,7 @@ namespace TaskManager.API.Controllers
                         Status = task.Status,
                         StartTime = task.StartTime,
                         EndDate = task.EndDate,
-                        AssignedTo = task.AssignedTo
+                        AssignedTo = task.MemberId
                     })
                     .ConfigureAwait(false);
 
@@ -190,7 +190,7 @@ namespace TaskManager.API.Controllers
                     })
                     .ConfigureAwait(false);
 
-                return result ? NoContent() : BadRequest("Unable to update task");
+                return result ? NoContent() : BadRequest("Unable to delete task");
             }
             catch (Exception ex)
             {

@@ -57,7 +57,7 @@ namespace TaskManager.Infrastucture.Persistance
                 Name = "Member",
                 Surname = "User",
                 IsActive = true,
-                IsMember = false
+                IsMember = true
             };
 
             if (userManager.Users.All(u => u.UserName != memberUser.UserName))
@@ -68,7 +68,8 @@ namespace TaskManager.Infrastucture.Persistance
                 // Member meta data
                 await context.Members
                     .AddAsync(new Domain.Enitities.Member { 
-                        UserId = memberUser.Id
+                        UserId = memberUser.Id,
+                        IsActive = true
                     })
                     .ConfigureAwait(false);
             }

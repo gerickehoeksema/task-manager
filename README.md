@@ -20,6 +20,8 @@ https://www.daimto.com/unit-testing-with-a-usermanager/
 
 ## Improvements
 - would like to improve User- and RoleManager to not have that clutter in the API
+- in the near future I would like to have IdentityServer managing all my users
+- OData might also be a nice improvement
 
 ## Time breakdown
 - Day 1: About 2 hours to get basic structure of project

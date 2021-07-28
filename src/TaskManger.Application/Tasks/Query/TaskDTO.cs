@@ -19,7 +19,7 @@ namespace TaskManager.Application.Tasks.Query
         public DateTime? StartTime { get; set; }
         public DateTime? EndDate { get; set; }
         public TaskStatus_Enum Status { get; set; }
-        public long? AssignedTo { get; set; }
+        public long? MemberId { get; set; }
 
         public MemberDTO Member { get; set; }
 

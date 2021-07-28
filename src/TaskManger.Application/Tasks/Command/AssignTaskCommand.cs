@@ -39,7 +39,7 @@ namespace TaskManager.Application.Tasks.Command
                 if (member == null)
                     return false;
 
-                task.AssignedTo = member.Id;
+                task.MemberId = member.Id;
 
                 return (await context.SaveChangesAsync(cancellationToken).ConfigureAwait(false)) > 0;
             }

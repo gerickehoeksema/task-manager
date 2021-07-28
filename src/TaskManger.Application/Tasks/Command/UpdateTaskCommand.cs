@@ -46,7 +46,7 @@ namespace TaskManager.Application.Tasks.Command
                 task.Status = request.Status;
                 task.StartTime = request.StartTime;
                 task.EndDate = request.EndDate;
-                task.AssignedTo = request.AssignedTo; // TODO: Check if member is in db
+                task.MemberId = request.AssignedTo; // TODO: Check if member is in db
 
                 return (await context.SaveChangesAsync(cancellationToken).ConfigureAwait(false)) > 0;
             }

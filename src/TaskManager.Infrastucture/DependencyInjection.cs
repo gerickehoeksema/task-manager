@@ -30,6 +30,7 @@ namespace TaskManager.Infrastucture
             services.AddSingleton<IJwtConfiguration>(jwtConfig);
 
             services.AddTransient<IDateTimeService, DateTimeService>();
+            services.AddTransient<IIdentityUserService, IdentityUserService>();
 
             // Adding Authentication  
             services.AddAuthentication(options =>

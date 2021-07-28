@@ -11,6 +11,34 @@
             <param name="model"></param>
             <returns>JWT Token</returns>
         </member>
+        <member name="T:TaskManager.API.Controllers.MemberController">
+            <summary>
+            Member controller
+            </summary>
+        </member>
+        <member name="M:TaskManager.API.Controllers.MemberController.#ctor(Microsoft.Extensions.Logging.ILogger{TaskManager.API.Controllers.MemberController})">
+            <summary>
+            Member Controller Constructor
+            </summary>
+            <param name="logger"></param>
+        </member>
+        <member name="M:TaskManager.API.Controllers.MemberController.GetList">
+            <summary>
+            Get list of active members
+            </summary>
+        </member>
+        <member name="M:TaskManager.API.Controllers.MemberController.Get(System.Int64)">
+            <summary>
+            Get a member
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:TaskManager.API.Controllers.MemberController.Delete(System.Int64)">
+            <summary>
+            Delete a member
+            </summary>
+            <param name="id"></param>
+        </member>
         <member name="T:TaskManager.API.Controllers.TaskController">
             <summary>
             Task API Controller
@@ -38,6 +66,11 @@
             </summary>
         </member>
         <member name="M:TaskManager.API.Controllers.TaskController.Put(TaskManager.Application.Tasks.Query.TaskDTO)">
+            <summary>
+            Update a new task
+            </summary>
+        </member>
+        <member name="M:TaskManager.API.Controllers.TaskController.Assign(System.Int64,System.Int64)">
             <summary>
             Update a new task
             </summary>
